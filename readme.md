@@ -5,7 +5,7 @@ some other data (a carrier). Often this is within images, where the lower bits
 can be used to store a secret message. While having few real uses, steganography
 can be a fun exercise in information theory.
 
-Skjul (danish for *hide* as in *to hide*), is a text-based steganography
+Skjul (Danish for *hide*, as in *to hide*), is a text-based steganography
 implementation. Given a carrier message, Skjul can encode a secret bitstring
 into it by slightly changing words - hopefully so little as to be imperceptible
 to an uninitiated reader.
@@ -72,8 +72,8 @@ also tend to have similar embeddings.
 Using a word vector model, we pair each embedding with a neighbor using cosine
 distance as the metric. Note that these pairings must be exclusive, i.e.
 `[(a,b), (a,c)]` is not valid because `a` participates in both pairs. Instead,
-we find the k-nearest neighbors and then greedily pair words based on the
-distance to the closest non-paired k-neighbor. This means that words are not
+we find the k-nearest neighbors for each word then greedily pair words based on
+the distance to the closest non-paired neighbor. This means that words are not
 always paired with their closest neighbor and some words are not paired at all.
 
 This repository includes a precomputed pair list based on
@@ -102,12 +102,11 @@ encoding scheme, as we do not know the amount of bits for the length beforehand.
 For this, we use
 [Elias gamma coding](https://en.wikipedia.org/wiki/Elias_gamma_coding). In gamma
 coding, we first encode the length of the integer in unary zero bits followed by
-the integer iteself.
+the length integer itself.
 
 A downside of this is that it increases the length of the secret, especially for
 small secrets. This is due to how the number of bits in the length itself is
-comparatively more significant to the number of bits in a short secret than in a
-long secret.
+comparatively more significant than it would be for a longer message.
 
 ### A pinch of noise
 
